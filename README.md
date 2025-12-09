@@ -1,2 +1,1 @@
-# ChristmasWebsite
-This is a school assignment.
+# Video background Christmas welcome page

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Merry Christmas — Welcome</title>
+
+  <!-- Festive fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background video (place video.mp4 next to this file) -->
+  <video id="bg-video" autoplay muted loop playsinline poster="poster.jpg" aria-hidden="true">
+    <source src="video.mp4" type="video/mp4">
+    <!-- Fallback image/text -->
+  </video>
+
+  <!-- Dim overlay so text is readable -->
+  <div class="overlay" aria-hidden="true"></div>
+
+  <!-- Center message -->
+  <main class="hero" role="main" aria-labelledby="welcome-heading">
+    <div class="hero-inner">
+      <h1 id="welcome-heading">Merry Christmas — Welcome!</h1>
+      <p class="subtitle">Wishing you joy and warmth this holiday season.</p>
+    </div>
+  </main>
+
+  <!-- Small helper to retry play on user interaction (useful on some mobile browsers) -->
+  <script>
+    (function () {
+      const v = document.getElementById('bg-video');
+      if (!v) return;
+
+      // If autoplay failed, try again once the user interacts
+      function tryPlay() {
+        v.play().catch(() => {
+          // ignored; play will typically succeed after a user gesture
+        });
+        window.removeEventListener('touchstart', tryPlay);
+        window.removeEventListener('click', tryPlay);
+      }
+
+      // If the video is paused (autoplay blocked), attempt play on first user gesture
+      if (v.paused) {
+        window.addEventListener('touchstart', tryPlay, { once: true });
+        window.addEventListener('click', tryPlay, { once: true });
+      }
+    })();
+  </script>
+</body>
+</html>
